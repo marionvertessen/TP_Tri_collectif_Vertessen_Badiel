@@ -70,4 +70,6 @@ for i in range(20):
 
 print(listeAgent)
 affichageAgent(listeAgent)
+print(listeAgent)
+affichageAgent(listeAgent)
 
