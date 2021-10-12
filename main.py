@@ -1,15 +1,10 @@
 from random import randint
-
 import numpy as np
 import sys
-
 from agent import Agent
 from environnement import Environnement
 
 ##Creation environnement
-
-
-
 def alea():
     x = randint(0, env.taille - 1)
     return x
@@ -70,6 +65,13 @@ for i in range(20):
 
 print(listeAgent)
 affichageAgent(listeAgent)
-print(listeAgent)
-affichageAgent(listeAgent)
+
+#Déplacement de l'agent
+a = 1
+for i in range (4):
+    listeAgent = env.deplace(listeAgent, a)
+    affichageAgent(listeAgent)
+
+
+
 
