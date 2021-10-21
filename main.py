@@ -76,13 +76,13 @@ while cmpt<500000:
     choix = randint(0, 19)
     i = listePosAgent[choix][0]
     j = listePosAgent[choix][1]
-    listePosAgent, agent = env.deplace(array[i][j], listeAgent[choix], listePosAgent, choix, pas)
+    listePosAgent, agent, c = env.deplace(array[i][j], listeAgent[choix], listePosAgent, choix, pas)
     if agent.change == 1:
         print("Je change en 0")
         array[i][j] = 0
         agent.change = 0
     elif agent.change == 2:
-        array[listePosAgent[choix][0]][listePosAgent[choix][1]] = agent.tenir
+        array[listePosAgent[choix][0]][listePosAgent[choix][1]] = agent.temp
         agent.change = 0
     print(array)
     affichageAgent(listeAgent, listePosAgent)

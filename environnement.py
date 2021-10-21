@@ -39,6 +39,7 @@ class Environnement:
         else:
             if depot < agent.pdepot:
                 print("Je souhaite déposer "+ str(agent.tenir))
+                agent.temp = agent.tenir
                 agent.tenir = 0
                 agent.change = 2
         for i in range(len(agent.memoire)):

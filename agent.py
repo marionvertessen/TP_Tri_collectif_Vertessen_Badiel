@@ -24,6 +24,7 @@ class Agent:
         self.pprise = -1
         self.pdepot = -1
         self.change = 0 #Pris ou déposé
+        self.temp = 0
 
     def prob(self, actual, memoire, tenir):
         pprise = -1
