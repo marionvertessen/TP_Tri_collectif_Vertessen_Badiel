@@ -19,9 +19,9 @@ def compte(nb, env):
     return compt
 
 ##Liste des Agents
-def affichageAgent (liste):
-    for i in range (len(liste)):
-        print("L'id est "+ str(liste[i].id) +" ("+ str(liste[i].posx)+","+str(liste[i].posy)+")")
+def affichageAgent (liste_Agent, liste_Pos_Agent):
+    for i in range (len(liste_Pos_Agent)):
+        print("L'id est "+ str(liste_Agent[i].id) +" ("+ str(liste_Pos_Agent[i][0])+","+str(liste_Pos_Agent[i][1])+")")
 
 
 env = Environnement()
@@ -53,49 +53,37 @@ for i in range(200):
     array[x][y] = 2
 
 print(array)
-print("Je suis un objet 1 à la position "+ str(array[0][3]))
-print(compte(1, env))
-print(compte(2, env))
+#print(compte(1, env))
+#print(compte(2, env))
 
 #Creation agent
 listeAgent=[]
+listePosAgent=[]
 for i in range(20):
     x = alea()
     y = alea()
-    agent = Agent(i, x, y)
+    agent = Agent(i)
     listeAgent.append(agent)
+    listePosAgent.append([x,y])
 
 #Afficher la liste des agents
-affichageAgent(listeAgent)
+affichageAgent(listeAgent, listePosAgent)
 
 #Déplacement de l'agent
-a = 1
-m = 0
-n = 0
-for b in range (20):
-            choix = randint(0, 19)
-            i = listeAgent[choix].posx
-            j = listeAgent[choix].posy
-            upx = i - a
-            upy = j
-            up_rightx = i - a
-            up_righty = j + a
-            rightx = i
-            righty = j + a
-            down_rightx = i + a
-            down_righty = j + a
-            downx = i + a
-            downy = j
-            down_leftx = i + a
-            down_lefty = j - a
-            leftx = i
-            lefty = j - a
-            up_leftx = i - a
-            up_lefty = j - a
-            listeAgent, m, n, d= env.deplace(env.env[i][j], listeAgent, a, choix, env.env[upx][upy], env.env[up_rightx][up_righty], env.env[rightx][righty], env.env[down_rightx][down_righty], env.env[downx][downy], env.env[down_leftx][down_lefty], env.env[leftx][lefty], env.env[up_leftx][up_lefty])
-            if d == 1:
-                array[i][j] = 0
-            elif d == 2:
-                array[m][n] = listeAgent[choix].tenir
-            print(array)
-            affichageAgent(listeAgent)
+pas = 1
+cmpt = 0
+while cmpt<500000:
+    choix = randint(0, 19)
+    i = listePosAgent[choix][0]
+    j = listePosAgent[choix][1]
+    listePosAgent, agent = env.deplace(array[i][j], listeAgent[choix], listePosAgent, choix, pas)
+    if agent.change == 1:
+        print("Je change en 0")
+        array[i][j] = 0
+        agent.change = 0
+    elif agent.change == 2:
+        array[listePosAgent[choix][0]][listePosAgent[choix][1]] = agent.tenir
+        agent.change = 0
+    print(array)
+    affichageAgent(listeAgent, listePosAgent)
+    cmpt+1
