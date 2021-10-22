@@ -88,7 +88,7 @@ app.exec_()
 #Déplacement de l'agent
 pas = 1
 cmpt = 0
-while cmpt<800000:
+while cmpt<5000000:
     choix = randint(0, 19)
     i = listePosAgent[choix][0]
     j = listePosAgent[choix][1]
