@@ -41,4 +41,3 @@ class Environnement:
             print("La valeur de la mémoire est " + str(listeAgent[choix].memoire[i]))
         print("#######################Mon tenir est " + str(listeAgent[choix].tenir))
         return listeAgent, listeAgent[choix].posx, listeAgent[choix].posy, listeAgent[choix].d
-

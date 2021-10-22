@@ -1,6 +1,10 @@
 from random import randint
 import numpy as np
 import sys
+
+from PyQt5.QtWidgets import QApplication
+
+from MainWindow import MainWindow
 from agent import Agent
 from environnement import Environnement
 
@@ -68,11 +72,25 @@ for i in range(20):
 #Afficher la liste des agents
 affichageAgent(listeAgent)
 
+app = QApplication.instance()
+if not app: # sinon on crée une instance de QApplication
+    app = QApplication(sys.argv)
+
+# création d'une fenêtre avec QWidget dont on place la référence dans fen
+fen = MainWindow(env)
+
+# la fenêtre est rendue visible
+fen.show()
+
+# exécution de l'application, l'exécution permet de gérer les événements
+app.exec_()
+
+
 #Déplacement de l'agent
 a = 1
 m = 0
 n = 0
-for b in range (20):
+for b in range (100000):
             choix = randint(0, 19)
             i = listeAgent[choix].posx
             j = listeAgent[choix].posy
@@ -99,3 +117,16 @@ for b in range (20):
                 array[m][n] = listeAgent[choix].tenir
             print(array)
             affichageAgent(listeAgent)
+
+app2 = QApplication.instance()
+if not app2: # sinon on crée une instance de QApplication
+    app2 = QApplication(sys.argv)
+
+# création d'une fenêtre avec QWidget dont on place la référence dans fen
+fen2 = MainWindow(env)
+
+# la fenêtre est rendue visible
+fen2.show()
+
+# exécution de l'application, l'exécution permet de gérer les événements
+app2.exec_()
