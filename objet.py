@@ -3,4 +3,3 @@ class Objet:
         self.id = id
         self.posx =posx
         self.posy = posy
-
