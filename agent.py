@@ -9,12 +9,23 @@ def update_memoire(actual, memoire):
 
 
 
-def nb_Agents (liste, agent):
-    compt = 0
-    for i in range (len(liste)):
-        if liste[i] == agent:
-            compt = compt + 1
-        return compt
+def prop_Agents (liste, objet):
+    f = 0
+    f_c = 0
+    if objet == 1:
+        for i in range (len(liste)):
+            if liste[i] == objet:
+                f = f + 1
+            if liste[i] == 2:
+                f_c = f_c + 1
+    elif objet == 2:
+        for i in range(len(liste)):
+            if liste[i] == objet:
+                f = f + 1
+            if liste[i] == 1:
+                f_c = f_c + 1
+    f = (f) / len(liste)
+    return f
 
 class Agent:
     def __init__(self, id):
@@ -30,14 +41,14 @@ class Agent:
         pdepot = -1
         if actual == 1:
             if tenir == 0:
-                f1 = nb_Agents(memoire, 1)
+                f1 = prop_Agents(memoire, 1)
                 pprise = (0.1 / (0.1 + f1)) ** 2
                 return pprise
             else:
                 return pprise
         elif actual == 2:
             if tenir == 0:
-                f2 = nb_Agents(memoire, 2)
+                f2 = prop_Agents(memoire, 2)
                 pprise = (0.1 / (0.1 + f2)) ** 2
                 return pprise
             else:
@@ -46,11 +57,11 @@ class Agent:
             if tenir == 0:
                 return pdepot
             elif tenir == 1:
-                f1 = nb_Agents(memoire, 1)
+                f1 = prop_Agents(memoire, 1)
                 pdepot = (f1 / (0.3 + f1)) ** 2
                 return pdepot
             else:
-                f2 = nb_Agents(memoire, 2)
+                f2 = prop_Agents(memoire, 2)
                 pdepot = (f2 / (0.3 + f2)) ** 2
                 return pdepot
 
