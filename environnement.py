@@ -7,7 +7,7 @@ class Environnement:
     env = np.zeros((taille,taille))
 
     def deplace(self, actual, agent, pos_agent, choix, pas):
-        print("Je suis l'agent "+str(agent.id))
+        #print("Je suis l'agent "+str(agent.id))
         deplacement = agent.perception_action(actual, pos_agent[choix])
         if deplacement == 0:
             pos_agent[choix][0] -= pas
