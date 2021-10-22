@@ -82,9 +82,10 @@ while cmpt<500000:
         array[i][j] = 0
         agent.change = 0
     elif agent.change == 2:
-        array[listePosAgent[choix][0]][listePosAgent[choix][1]] = agent.tenir
-        agent.tenir = 0
-        agent.change = 0
+        if array[listePosAgent[choix][0]][listePosAgent[choix][1]] == 0:
+            array[listePosAgent[choix][0]][listePosAgent[choix][1]] = agent.tenir
+            agent.tenir = 0
+            agent.change = 0
     #print(array)
     #affichageAgent(listeAgent, listePosAgent)
     cmpt+1

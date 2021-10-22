@@ -40,7 +40,6 @@ class Environnement:
             if depot < agent.pdepot:
                 #print("Je souhaite déposer "+ str(agent.tenir))
                 agent.change = 2
-        """for i in range(len(agent.memoire)):
-            print("La valeur de la mémoire en "+ str(i) +" est " + str(agent.memoire[i]))"""
+
         return pos_agent, agent
 
