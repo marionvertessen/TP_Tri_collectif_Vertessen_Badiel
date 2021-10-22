@@ -35,14 +35,12 @@ class Environnement:
             if prise < agent.pprise:
                 agent.tenir = actual
                 agent.change = 1
-                print("Je souhaite prendre")
+                #print("Je souhaite prendre")
         else:
             if depot < agent.pdepot:
-                print("Je souhaite déposer "+ str(agent.tenir))
-                agent.temp = agent.tenir
-                agent.tenir = 0
+                #print("Je souhaite déposer "+ str(agent.tenir))
                 agent.change = 2
-        for i in range(len(agent.memoire)):
-            print("La valeur de la mémoire en "+ str(i) +" est " + str(agent.memoire[i]))
+        """for i in range(len(agent.memoire)):
+            print("La valeur de la mémoire en "+ str(i) +" est " + str(agent.memoire[i]))"""
         return pos_agent, agent
 

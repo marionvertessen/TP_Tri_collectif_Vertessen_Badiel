@@ -24,7 +24,6 @@ class Agent:
         self.pprise = -1
         self.pdepot = -1
         self.change = 0 #Pris ou déposé
-        self.temp = 0
 
     def prob(self, actual, memoire, tenir):
         pprise = -1
@@ -84,22 +83,8 @@ class Agent:
                     self.pprise = self.prob(actual, self.memoire, self.tenir)
                 else:
                     self.pdepot = self.prob(actual, self.memoire, self.tenir)
-                o = randint(0, 4)
-                if o == 0:
-                    #Il se déplace à gauche
-                    return 6
-                elif o == 1:
-                    # Il se déplace à gauche et en bas
-                    return 5
-                elif o == 2:
-                    #Il se déplace en bas
-                    return 4
-                elif o == 3:
-                    #Il se déplace à droite et en bas
-                    return 3
-                else:
-                    #Il se déplace à droite
-                    return 2
+                o = randint(2, 6)
+                return o
 
         elif pos[0] == env.taille - 1: #Si l'agent est sur la dernière ligne
             if pos[1] == 0: #Si l'agent est sur la première colonne (49;0)
@@ -130,21 +115,12 @@ class Agent:
                 else:
                     self.pdepot = self.prob(actual, self.memoire, self.tenir)
                 o = randint(0, 4)
-                if o == 0:
-                    # Il se déplace à gauche
+                if o == 3:
                     return 6
-                elif 0 == 1:
-                    # Il se déplace à gauche et en haut
+                elif o == 4:
                     return 7
-                elif o == 2:
-                    # Il se déplace en haut
-                    return 0
-                elif o == 3:
-                    # Il se déplace à droite et en haut
-                    return 1
                 else:
-                    # Il se déplace à droite
-                    return 2
+                    return o
 
         #Au bord gauche
         elif pos[1] == 0:
@@ -163,22 +139,12 @@ class Agent:
                 self.pprise = self.prob(actual, self.memoire, self.tenir)
             else:
                 self.pdepot = self.prob(actual, self.memoire, self.tenir)
-            o = randint(0, 4)
-            if o == 0:
+            o = randint(4, 8)
+            if o == 8:
                 # Il se déplace en bas
-                return 4
-            elif o == 1:
-                # Il se déplace à gauche et en bas
-                return 5
-            elif o == 2:
-                # Il se déplace à gauche
-                return 6
-            elif o == 3:
-                # Il se déplace à gauche et en haut
-                return 7
-            else:
-                # Il se déplace en haut
                 return 0
+            else:
+                return o
         #Dans les 8 cas
         else:
             self.memoire = update_memoire(actual, self.memoire)
