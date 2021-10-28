@@ -40,6 +40,4 @@ class MainWindow(QMainWindow):
                 self.array[i, j].setFixedSize(QSize(w_screen / len(self.world), h_screen / len(self.world)))
                 self.array[i, j].setAlignment(Qt.AlignCenter)
                 self.label_size = min(w_screen / len(self.world), h_screen / len(self.world))
-                self.image = QPixmap('560938.png').scaled(self.label_size, self.label_size)
-                #self.array[i, j].setPixmap(self.image)
                 grid.addWidget(self.array[i, j], i, j)

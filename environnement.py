@@ -2,16 +2,12 @@ import random
 import sys
 
 import matplotlib.pyplot as plt
-import matplotlib.cm as cm
 import numpy as np
 from PyQt5.QtWidgets import QApplication
 
 from MainWindow import MainWindow
 from agent import Agent
 
-from pyclustering.cluster import cluster_visualizer
-from pyclustering.cluster.xmeans import xmeans
-from pyclustering.cluster.center_initializer import kmeans_plusplus_initializer
 from sklearn.metrics import silhouette_samples, silhouette_score
 from sklearn.cluster import KMeans
 
