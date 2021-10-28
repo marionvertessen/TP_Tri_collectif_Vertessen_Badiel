@@ -1,4 +1,3 @@
-from environnement import Environnement
 from random import randint
 
 def update_memoire(actual, memoire):
@@ -35,6 +34,7 @@ class Agent:
         self.pprise = -1
         self.pdepot = -1
         self.change = 0 #Pris ou déposé
+        self.pas = 1
 
     def prob(self, actual, memoire, tenir):
         pprise = -1
@@ -65,8 +65,7 @@ class Agent:
                 pdepot = (f2 / (0.3 + f2)) ** 2
                 return pdepot
 
-    def perception_action(self, actual, pos):
-        env = Environnement()
+    def perception_action(self, actual, pos, taille_grille):
         #Si l'agent est sur la première ligne
         if pos[0] == 0:
             #Si l'agent est sur la première colonne (0;0)
@@ -79,7 +78,7 @@ class Agent:
                     self.pdepot = self.prob(actual, self.memoire, self.tenir)
                 return o
             #Si l'agent est à la dernière colonne (0;49)
-            elif pos[1] == env.taille - 1:
+            elif pos[1] == taille_grille - 1:
                 o = randint(4, 6)
                 self.memoire = update_memoire(actual, self.memoire)
                 if self.tenir == 0:
@@ -97,7 +96,7 @@ class Agent:
                 o = randint(2, 6)
                 return o
 
-        elif pos[0] == env.taille - 1: #Si l'agent est sur la dernière ligne
+        elif pos[0] == taille_grille - 1: #Si l'agent est sur la dernière ligne
             if pos[1] == 0: #Si l'agent est sur la première colonne (49;0)
                 o = randint(0, 2)
                 self.memoire = update_memoire(actual, self.memoire)
@@ -106,7 +105,7 @@ class Agent:
                 else:
                     self.pdepot = self.prob(actual, self.memoire, self.tenir)
                 return o
-            elif pos[1] == env.taille - 1: #Si l'agent est à la dernière colonne (49;49)
+            elif pos[1] == taille_grille - 1: #Si l'agent est à la dernière colonne (49;49)
                 n = randint(0, 2)
                 self.memoire = update_memoire(actual, self.memoire)
                 if self.tenir == 0:
@@ -144,7 +143,7 @@ class Agent:
             return o
 
         #Au bord droit
-        elif pos[1] == env.taille - 1:
+        elif pos[1] == taille_grille - 1:
             self.memoire = update_memoire(actual, self.memoire)
             if self.tenir == 0:
                 self.pprise = self.prob(actual, self.memoire, self.tenir)
