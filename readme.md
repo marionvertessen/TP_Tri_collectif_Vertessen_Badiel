@@ -7,9 +7,8 @@ Ce projet a été réalisé dans le cadre d'un projet de système multi-agent po
 Des agents réactifs trient des objets A et B sur une grille de taille NxM
 
 
-##Démarrage
-
-
+Démarrage
+---
 ---
 Il faut exécuter la commande suivante :  ``python main.py``
 
