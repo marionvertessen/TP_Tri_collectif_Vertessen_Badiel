@@ -23,7 +23,7 @@ def prop_Agents (liste, objet):
                 f = f + 1
             if liste[i] == 1:
                 f_c = f_c + 1
-    f = (f + f_c*0) / len(liste)
+    f = (f + f_c*0.1) / len(liste)
     return f
 
 class Agent:
