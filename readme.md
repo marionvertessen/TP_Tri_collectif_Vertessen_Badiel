@@ -16,7 +16,7 @@ Il faut exécuter la commande suivante :  ``python main.py``
 
 Ce qui est requis pour démarrer ce projet :
 
-- PyQt5
+- PyQt5 
 - MatplotLib
 - Numpy
 - Sklearn
