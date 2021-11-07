@@ -21,6 +21,12 @@ Ce qui est requis pour démarrer ce projet :
 - Numpy
 - Sklearn
 
+### Utilisation interface graphique 
+
+Lors de l'éxécution du programme, une fenêtre va apparaître pour différents nombres d'itérations.
+Pour continuer l'exécution, il faut fermer la fenêtre pour que le reste des calculs s'exécutent et affiche ainsi la fenêtre suivante.
+(cf vidéo)
+
 ## Auteurs
 
 ---

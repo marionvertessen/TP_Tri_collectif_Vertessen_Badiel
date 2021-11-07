@@ -142,11 +142,13 @@ class Environnement:
             # affichageAgent(listeAgent, listePosAgent)
             #print(cmpt)
             if cmpt %500000==0:
+
                 nb_1 = self.selecting_nb_cluster(self.liste_coord(1))
                 nb_2 = self.selecting_nb_cluster(self.liste_coord(2))
                 self.liste_cluster.append(nb_2 + nb_1)
                 self.liste_nb_ite.append(cmpt)
             if cmpt == 1000000 or cmpt == 2000000 or cmpt == 3000000 or cmpt % 5000000 == 0:
+
                 app2 = QApplication.instance()
                 print("Affichage de la grille pour "+ str(cmpt) + " itérations !")
                 if not app2:  # sinon on crée une instance de QApplication
@@ -160,6 +162,7 @@ class Environnement:
 
                 # exécution de l'application, l'exécution permet de gérer les événements
                 app2.exec_()
+                print("Calculs en cours ...")
             cmpt += 1
         Y = np.array(self.liste_cluster)
         X = np.array(self.liste_nb_ite)
