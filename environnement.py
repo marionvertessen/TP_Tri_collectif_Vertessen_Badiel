@@ -49,6 +49,18 @@ class Environnement:
                     vide = True
             self.env[x][y] = 2
 
+        ##Creation Objet C
+        for i in range(200):
+            vide = False
+            x = self.alea()
+            y = self.alea()
+            while vide == False:
+                x = self.alea()
+                y = self.alea()
+                if self.env[x][y] == 0:
+                    vide = True
+            self.env[x][y] = 3
+
         # Creation agent
 
         for i in range(20):
@@ -100,43 +112,87 @@ class Environnement:
         while cmpt <= nb_iteration:
             # on choisit l'agent auquel on donne la parole
             choix = random.randint(0, 19)
-            agent = self.listeAgent[choix]
             i = self.listePosAgent[choix][0]
+            i_au = self.listePosAgent[choix][0]
             j = self.listePosAgent[choix][1]
+            j_au = self.listePosAgent[choix][1]
+            agent = self.listeAgent[choix]
             deplacement = agent.perception_action(self.env[i][j], self.listePosAgent[choix], self.taille)
-            depot = random.uniform(0, 1)
-            prise = random.uniform(0, 1)
-            if agent.tenir == 0:
-                if prise < agent.pprise and self.env[i][j] != 0:
-                    agent.tenir = self.env[i][j]
-                    self.env[i][j] = 0
-                    # print("Je souhaite prendre")
-            else:
+            no_agent = 1
+            if agent.tenir == 3:
+                for agentc in listeAgent:
+                    if agent.tenir == 3:
+                        agent+no_agent == agentc
+                        no_agent+=1
+                depot = random.uniform(0, 1)
                 if depot < agent.pdepot and self.env[i][j] == 0:
                     # print("Je souhaite déposer "+ str(agent.tenir))
                     self.env[i][j] = agent.tenir
-                    agent.tenir = 0
+                    agent1.tenir = 0
+                    agant2.tenir = 0
+            else:
+                #i, i_au = self.listePosAgent[choix][0]
+                #j, j_au = self.listePosAgent[choix][1]
+                deplacement = agent.perception_action(self.env[i][j], self.listePosAgent[choix], self.taille)
+                depot = random.uniform(0, 1)
+                prise = random.uniform(0, 1)
+                if self.env[i][j] == 3:
+                    if agent.tenir == 0:
+                        no_var = 1
+                        listePosAutour = []
+                        trouve = False
+                        while agent.signal>0:
+                            if i_au!= self.taille and j_au!= self.taille and i_au!= 0 and i_au != 0:
+                                listePosAutour+no_var.append([i_au-1, j_au], [i_au-1, j_au+1], [i_au, j_au+1], [i_au+1, j_au+1], [i_au+1, j_au], [i_au+1, j_au-1], [i_au, j_au-1], [i_au-1, j_au-1])
+                                for pos in listePosAutour+no_var:
+                                    for posAgent in listePosAgent[choix]:
+                                        if pos[0] == posAgent[0] and pos[1] ==posAgent[1]:
+                                            trouve = True
+                                            pos_agent_trouve = posAgent
+                                no_var+=1
+                                agent.signal-=1
+                                i_au+=1
+                                j_au+=1
+                        if trouve == True:
+                            agent_contact = listeAgent[listePosAgent.index(pos_agent_trouve)]
+                            if agent_contact.tenir == 0:
+                                listePosAgent[listePosAgent.index(pos_agent_trouve)][0] = i
+                                listePosAgent[listePosAgent.index(pos_agent_trouve)][1] = j
+                                agent.tenir = 3
+                                agent_contact.tenir = 3
+                                self.env[i][j] = 0
+                else:
+                    if agent.tenir == 0:
+                        if prise < agent.pprise and self.env[i][j] != 0:
+                            agent.tenir = self.env[i][j]
+                            self.env[i][j] = 0
+                                # print("Je souhaite prendre")
+                    else:
+                        if depot < agent.pdepot and self.env[i][j] == 0:
+                         # print("Je souhaite déposer "+ str(agent.tenir))
+                            self.env[i][j] = agent.tenir
+                            agent.tenir = 0
 
-            if deplacement == 0:
-                self.listePosAgent[choix][0] -= self.listeAgent[choix].pas
-            elif deplacement == 1:
-                self.listePosAgent[choix][0] -= self.listeAgent[choix].pas
-                self.listePosAgent[choix][1] += self.listeAgent[choix].pas
-            elif deplacement == 2:
-                self.listePosAgent[choix][1] += self.listeAgent[choix].pas
-            elif deplacement == 3:
-                self.listePosAgent[choix][0] += self.listeAgent[choix].pas
-                self.listePosAgent[choix][1] += self.listeAgent[choix].pas
-            elif deplacement == 4:
-                self.listePosAgent[choix][0] += self.listeAgent[choix].pas
-            elif deplacement == 5:
-                self.listePosAgent[choix][0] += self.listeAgent[choix].pas
-                self.listePosAgent[choix][1] -= self.listeAgent[choix].pas
-            elif deplacement == 6:
-                self.listePosAgent[choix][1] -= self.listeAgent[choix].pas
-            elif deplacement == 7:
-                self.listePosAgent[choix][0] -= self.listeAgent[choix].pas
-                self.listePosAgent[choix][1] -= self.listeAgent[choix].pas
+                    if deplacement == 0:
+                        self.listePosAgent[choix][0] -= self.listeAgent[choix].pas
+                    elif deplacement == 1:
+                        self.listePosAgent[choix][0] -= self.listeAgent[choix].pas
+                        self.listePosAgent[choix][1] += self.listeAgent[choix].pas
+                    elif deplacement == 2:
+                        self.listePosAgent[choix][1] += self.listeAgent[choix].pas
+                    elif deplacement == 3:
+                        self.listePosAgent[choix][0] += self.listeAgent[choix].pas
+                        self.listePosAgent[choix][1] += self.listeAgent[choix].pas
+                    elif deplacement == 4:
+                        self.listePosAgent[choix][0] += self.listeAgent[choix].pas
+                    elif deplacement == 5:
+                        self.listePosAgent[choix][0] += self.listeAgent[choix].pas
+                        self.listePosAgent[choix][1] -= self.listeAgent[choix].pas
+                    elif deplacement == 6:
+                        self.listePosAgent[choix][1] -= self.listeAgent[choix].pas
+                    elif deplacement == 7:
+                        self.listePosAgent[choix][0] -= self.listeAgent[choix].pas
+                        self.listePosAgent[choix][1] -= self.listeAgent[choix].pas
 
             # print(array)
             # affichageAgent(listeAgent, listePosAgent)

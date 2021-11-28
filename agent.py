@@ -3,7 +3,8 @@ from random import randint
 def update_memoire(actual, memoire):
     if len(memoire) > 10:
         del memoire[0]
-    memoire.append(actual)
+    if actual != 0.9 or actual != 0.8 or actual != 0.7:
+        memoire.append(actual)
     return memoire
 
 
@@ -17,11 +18,23 @@ def prop_Agents (liste, objet):
                 f = f + 1
             if liste[i] == 2:
                 f_c = f_c + 1
+            if liste[i] == 3:
+                f_c = f_c + 1
     elif objet == 2:
         for i in range(len(liste)):
             if liste[i] == objet:
                 f = f + 1
             if liste[i] == 1:
+                f_c = f_c + 1
+            if liste[i] == 3:
+                f_c = f_c + 1
+    elif objet == 3:
+        for i in range(len(liste)):
+            if liste[i] == objet:
+                f = f + 1
+            if liste[i] == 1:
+                f_c = f_c + 1
+            if liste[i] == 2:
                 f_c = f_c + 1
     f = (f + f_c*0.1) / len(liste)
     return f
@@ -35,10 +48,12 @@ class Agent:
         self.pdepot = -1
         self.change = 0 #Pris ou déposé
         self.pas = 1
+        self.signal = -1
 
     def prob(self, actual, memoire, tenir):
         pprise = -1
         pdepot = -1
+
         if actual == 1:
             if tenir == 0:
                 f1 = prop_Agents(memoire, 1)
@@ -53,6 +68,11 @@ class Agent:
                 return pprise
             else:
                 return pprise
+        elif actual == 3:
+            if tenir == 0:
+                signal = 2
+            else:
+                return pprise
         else:
             if tenir == 0:
                 return pdepot
@@ -60,9 +80,15 @@ class Agent:
                 f1 = prop_Agents(memoire, 1)
                 pdepot = (f1 / (0.3 + f1)) ** 2
                 return pdepot
-            else:
+            elif tenir == 2:
                 f2 = prop_Agents(memoire, 2)
                 pdepot = (f2 / (0.3 + f2)) ** 2
+                return pdepot
+            elif tenir == 3:
+                f3 = prop_Agents(memoire, 3)
+                pdepot = (f3 / (0.3 + f3)) ** 2
+                return pdepot
+            else:
                 return pdepot
 
     def perception_action(self, actual, pos, taille_grille):
